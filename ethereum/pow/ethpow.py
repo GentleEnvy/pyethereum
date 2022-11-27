@@ -42,7 +42,6 @@ cache_by_seed.max_items = 10
 
 
 def get_cache(block_number):
-    import sha3
     while len(cache_seeds) <= block_number // EPOCH_LENGTH:
         cache_seeds.append(utils.sha3(cache_seeds[-1]))
     seed = cache_seeds[block_number // EPOCH_LENGTH]

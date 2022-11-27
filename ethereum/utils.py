@@ -1,11 +1,5 @@
-try:
-    from Crypto.Hash import keccak
+from Crypto.Hash import keccak
 
-    def sha3_256(x): return keccak.new(digest_bits=256, data=x).digest()
-except ImportError:
-    import sha3 as _sha3
-
-    def sha3_256(x): return _sha3.keccak_256(x).digest()
 from py_ecc.secp256k1 import privtopub, ecdsa_raw_sign, ecdsa_raw_recover
 import sys
 import rlp
@@ -21,6 +15,9 @@ except ImportError:
     import warnings
     warnings.warn('could not import coincurve', ImportWarning)
     coincurve = None
+
+def sha3_256(x):
+    return keccak.new(digest_bits=256, data=x).digest()
 
 class Memoize:
     def __init__(self, fn):

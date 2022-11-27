@@ -1,18 +1,16 @@
-try:
-    from Crypto.Hash import keccak
+from Crypto.Hash import keccak
 
-    def sha3_256(x): return keccak.new(digest_bits=256, data=x).digest()
-
-    def sha3_512(x): return keccak.new(digest_bits=512, data=x)
-except BaseException:
-    import sha3 as _sha3
-
-    def sha3_256(x): return _sha3.sha3_256(x).digest()
-
-    def sha3_512(x): return _sha3.sha3_512(x).digest()
 from ethereum.utils import decode_hex
 from ethereum.utils import encode_hex
 import sys
+
+
+def sha3_256(x):
+    return keccak.new(digest_bits=256, data=x).digest()
+
+
+def sha3_512(x):
+    return keccak.new(digest_bits=512, data=x)
 
 WORD_BYTES = 4                    # bytes in word
 DATASET_BYTES_INIT = 2**30        # bytes in dataset at genesis
